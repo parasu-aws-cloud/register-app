@@ -13,8 +13,8 @@ pipeline{
         DOCKER_PASS = "jenkins-docker-token"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-	    JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     }
+    
     stages{
         
         stage("Cleanup Workspace"){
@@ -52,6 +52,15 @@ pipeline{
                 
             }
         }
+        
+        stage("Quality Gate"){
+           steps {
+               script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
+                }	
+            }
+
+        }
 
         stage("Build & Push Docker Image") {
             steps {
@@ -68,17 +77,7 @@ pipeline{
             }
 
        }
-        //  stage("Quality Gate"){
-        //    steps {
-        //        script {
-        //             waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
-        //         }	
-        //     }
-
-        // }
-
     }
 
 }
     
-
