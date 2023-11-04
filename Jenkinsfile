@@ -79,6 +79,14 @@ pipeline{
                 }
             }
         }
+
+        stage('Trivy Scan') {
+            steps {
+                script {
+                    sh 'trivy image parasuramkoppada/register-app-pipeline:latest'
+                }
+            }
+        }
     }
 }
     
