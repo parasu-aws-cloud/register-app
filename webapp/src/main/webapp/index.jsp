@@ -34,5 +34,6 @@
    <h1> Thank You </h1>
    <br>
    <h1> Happy Learning. See You Again. </h1>
-   <h1> i have completing the course</h1>
+   <h1> i have completed the course</h1>
+   <h1> please can you make video on email integration and slack integration</h1>
 </form>
