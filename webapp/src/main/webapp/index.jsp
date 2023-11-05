@@ -36,4 +36,5 @@
    <h1> Happy Learning. See You Again. </h1>
    <h1> i have completed the course</h1>
    <h1> please can you make video on email integration and slack integration</h1>
+   <h1>thank you so much for providing this type of content Ashfaque shaikh </h1>
 </form>
