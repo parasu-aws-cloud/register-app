@@ -10,7 +10,7 @@ pipeline{
     environment {
         ARTIFACT_ID="maven-project"
         CLASSIFIER=""
-        FILE_PATH="target/*.war"
+        FILE_PATH="**/*.war"
         TYPE="war"
         CREDENTIALS_ID="nexus-token"
         GROUP_ID="in.cloudtechx"
