@@ -65,6 +65,12 @@ pipeline{
             }
 
         }
+        
+        stage("Upload Artifacts To Nexus Repo"){
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: 'register-app', classifier: '', file: 'target/*.war', type: 'war']], credentialsId: 'nexus-token', groupId: 'in.cloudtechx', nexusUrl: 'http://10.0.0.20:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'cloudtechx-snapshot-repository', version: '1.0-SNAPSHOT'
+            }
+        }
 
         stage("Build & Push Docker Image") {
             steps {
