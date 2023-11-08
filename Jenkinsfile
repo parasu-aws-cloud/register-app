@@ -8,6 +8,18 @@ pipeline{
     }
 
     environment {
+        ARTIFACT_ID="register-app"
+        CLASSIFIER=""
+        FILE_PATH="target/*.war"
+        TYPE="war"
+        CREDENTIALS_ID="nexus-token"
+        GROUP_ID="in.cloudtechx"
+        NEXUS_URL="http://10.0.0.20:8081"
+        NEXUS_VERSION="nexus3"
+        PROTOCOL="http"
+        REPOSITORY="cloudtechx-snapshot-repository"
+        VERSION="1.0-SNAPSHOT"
+        
         APP_NAME = "register-app-pipeline"
         RELEASE = "1.0.0"
         DOCKER_USER = "parasuramkoppada"
@@ -68,7 +80,7 @@ pipeline{
         
         stage("Upload Artifacts To Nexus Repo"){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'register-app', classifier: '', file: 'target/*.war', type: 'war']], credentialsId: 'nexus-token', groupId: 'in.cloudtechx', nexusUrl: 'http://10.0.0.20:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'cloudtechx-snapshot-repository', version: '1.0-SNAPSHOT'
+               sh "nexusArtifactUploader artifacts: [[artifactId: 'register-app', classifier: '', file: 'target/*.war', type: 'war']], credentialsId: 'nexus-token', groupId: 'in.cloudtechx', nexusUrl: 'http://10.0.0.20:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'cloudtechx-snapshot-repository', version: '1.0-SNAPSHOT'"
             }
         }
 
