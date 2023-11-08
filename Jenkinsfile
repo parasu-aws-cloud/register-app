@@ -14,7 +14,7 @@ pipeline{
         TYPE="war"
         CREDENTIALS_ID="nexus-token"
         GROUP_ID="in.cloudtechx"
-        NEXUS_URL="http://10.0.0.20:8081"
+        NEXUS_URL="http://54.193.31.123:8081"
         NEXUS_VERSION="nexus3"
         PROTOCOL="http"
         REPOSITORY="cloudtechx-snapshot-repository"
@@ -78,12 +78,13 @@ pipeline{
 
         }
         
-        // stage("Upload Artifacts To Nexus Repo"){
-        //     steps{
-        //       sh "curl -v -u $CREDENTIALS_ID: --upload-file $FILE_PATH ${NEXUS_URL}/repository/${REPOSITORY}/${GROUP_ID}/${ARTIFACT_ID}/${VERSION}/${ARTIFACT_ID}-${VERSION}.${TYPE}"
+        stage("Upload Artifacts To Nexus Repo"){
+            steps{
+                
+              sh "curl -v -u $CREDENTIALS_ID: --upload-file $FILE_PATH ${NEXUS_URL}/repository/${REPOSITORY}/${GROUP_ID}/${ARTIFACT_ID}/${VERSION}/${ARTIFACT_ID}-${VERSION}.${TYPE}"
 
-        //     }
-        // }
+            }
+        }
 
         stage("Build & Push Docker Image") {
             steps {
