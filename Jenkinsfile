@@ -80,7 +80,8 @@ pipeline{
         
         stage("Upload Artifacts To Nexus Repo"){
             steps{
-               sh "curl -v -u $CREDENTIALS_ID: --upload-file $FILE_PATH "$NEXUS_URL/repository/$REPOSITORY/$GROUP_ID/$ARTIFACT_ID/$VERSION/$ARTIFACT_ID-$VERSION.$TYPE""
+              sh "curl -v -u $CREDENTIALS_ID: --upload-file $FILE_PATH ${NEXUS_URL}/repository/${REPOSITORY}/${GROUP_ID}/${ARTIFACT_ID}/${VERSION}/${ARTIFACT_ID}-${VERSION}.${TYPE}"
+
             }
         }
 
