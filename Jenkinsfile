@@ -26,6 +26,11 @@ pipeline{
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/parasu-aws-cloud/register-app'
             }
         }
+        stage("Build Application"){
+            steps{
+                sh "mvn clean package"
+            }
+        }
     }
     // post{
     //     always{
