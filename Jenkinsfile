@@ -89,7 +89,7 @@ pipeline{
         stage ('Cleanup Artifacts') {
            steps {
                script {
-                    sh "docker rmi ${REPOSITORY_URI}:${IMAGE_TAG}"
+                    //sh "docker rmi ${REPOSITORY_URI}:${IMAGE_TAG}"
                     sh "docker system prune -af"
                }
           }
