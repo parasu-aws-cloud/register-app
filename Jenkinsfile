@@ -4,6 +4,14 @@ pipeline{
         jdk 'Java17'
         maven 'Maven3'
     }
+    environment {
+        AWS_ACCOUNT_ID="913524947518"
+        AWS_DEFAULT_REGION="us-west-1" 
+        IMAGE_REPO_NAME="parasuram/devzen"
+        IMAGE_TAG="${RELEASE}-${BUILD_NUMBER}"
+        RELEASE = "latest"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+    }
     stages{
         stage("Cleanup Workspace"){
             steps{
@@ -45,6 +53,21 @@ pipeline{
                 }
                 
             }
+        }
+        stage('Logging into AWS ECR') {
+           steps {
+             script {
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+            }
+           }
+        }
+        // Building Docker images
+        stage('Building image') {
+          steps{
+           script {
+             dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+            }
+          }
         }
         // stage("Quality Gate"){
         //    steps {
