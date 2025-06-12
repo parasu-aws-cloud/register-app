@@ -90,7 +90,7 @@ pipeline{
            steps {
                script {
                     sh "docker rmi ${REPOSITORY_URI}:${IMAGE_TAG}"
-                    sh "docker rmi ${REPOSITORY_URI}:latest"
+                    sh "docker system prune -af"
                }
           }
         }
