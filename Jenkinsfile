@@ -77,6 +77,23 @@ pipeline{
             }
          }
        }
+       stage('Trivy Scan') {
+            steps {
+                script {
+                    //sh 'trivy image parasuramkoppada/register-app-pipeline:latest'
+                    sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${REPOSITORY_URI}:${IMAGE_TAG} --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table')
+                }
+            }
+        }
+
+        stage ('Cleanup Artifacts') {
+           steps {
+               script {
+                    sh "docker rmi ${REPOSITORY_URI}:${IMAGE_TAG}"
+                    sh "docker rmi ${REPOSITORY_URI}:latest"
+               }
+          }
+        }
         // stage("Quality Gate"){
         //    steps {
         //        script {
